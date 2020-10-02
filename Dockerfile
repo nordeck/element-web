@@ -3,9 +3,9 @@ FROM node:12 as builder
 
 # Support custom branches of the react-sdk and js-sdk. This also helps us build
 # images of riot-web develop.
-ARG USE_CUSTOM_SDKS=yes
+ARG USE_CUSTOM_SDKS=false
 ARG REACT_SDK_REPO="https://github.com/nordeck/matrix-react-sdk.git"
-ARG REACT_SDK_BRANCH="master"
+ARG REACT_SDK_BRANCH="develop"
 ARG JS_SDK_REPO="https://github.com/matrix-org/matrix-js-sdk.git"
 ARG JS_SDK_BRANCH="master"
 
