@@ -56,8 +56,8 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: my-ecr-repo
-        IMAGE_TAG: ${{ github.sha }}
+        ECR_REPOSITORY: nic-rooms-element
+        IMAGE_TAG: ${{ github.event.inputs.environment }}-latest
       run: |
         # Build a docker container and
         # push it to ECR so that it can
@@ -70,14 +70,14 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: task-definition.json
-        container-name: sample-app
+        task-definition: task-definition-${{ github.event.inputs.environment }}.json
+        container-name: nic-rooms-element
         image: ${{ steps.build-image.outputs.image }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: sample-app-service
-        cluster: default
+        service: nic-rooms-element-service
+        cluster: nic-rooms-${{ github.event.inputs.environment }}
         wait-for-service-stability: true
