@@ -26,7 +26,7 @@ RUN yarn build
 #RUN cp /src/config.sample.json /src/webapp/config.json
 
 # Ensure we populate the version file
-#RUN dos2unix /src/scripts/docker-write-version.sh && bash /src/scripts/docker-write-version.sh
+RUN dos2unix /src/scripts/docker-write-version.sh && bash /src/scripts/docker-write-version.sh
 
 
 # App
