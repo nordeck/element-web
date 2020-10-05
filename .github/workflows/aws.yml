@@ -59,8 +59,8 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: 751489943657.dkr.ecr.eu-central-1.amazonaws.com/nic-rooms-element
+        ECR_REGISTRY: 751489943657.dkr.ecr.eu-central-1.amazonaws.com
+        ECR_REPOSITORY: nic-rooms-element
         IMAGE_TAG: ${{ github.event.inputs.environment }}-latest
       run: |
         # Build a docker container and
