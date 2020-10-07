@@ -23,7 +23,7 @@
             ],
             "environment": [
                 {
-                    "name": "NODE_ENV",
+                    "name": "env",
                     "value": "test"
                 }
             ],
