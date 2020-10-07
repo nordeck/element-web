@@ -31,21 +31,21 @@
             "hostname": "nic-rooms-element-dev",
             "mountPoints": [
                 {
-                    "sourceVolume": "database",
-                    "containerPath": "/data"
+                    "sourceVolume": "config",
+                    "containerPath": "/app/config.json"
                 }
             ]
         }
     ],
     "volumes": [
         {
-            "name": "database",
+            "name": "config",
             "dockerVolumeConfiguration" : {
                 "scope": "shared",
                 "autoprovision": true,
                 "driver": "local",
                 "labels": {
-                    "database": "element-database"
+                    "config": "element-config"
                 }
             }
         }

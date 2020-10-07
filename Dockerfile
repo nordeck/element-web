@@ -9,6 +9,7 @@ ARG REACT_SDK_REPO="https://github.com/nordeck/matrix-react-sdk.git"
 ARG REACT_SDK_BRANCH="develop"
 ARG JS_SDK_REPO="https://github.com/matrix-org/matrix-js-sdk.git"
 ARG JS_SDK_BRANCH="master"
+ARG ENVIRONMENT="dev"
 
 RUN apt-get update && apt-get install -y git dos2unix \
 # These packages are required for building Canvas on architectures like Arm
@@ -24,6 +25,7 @@ RUN yarn build
 
 # Copy the config now so that we don't create another layer in the app image
 #RUN cp /src/config.sample.json /src/webapp/config.json
+RUN cp /src/config.json /src/webapp/config.json
 
 # Ensure we populate the version file
 RUN dos2unix /src/scripts/docker-write-version.sh && bash /src/scripts/docker-write-version.sh
@@ -33,6 +35,8 @@ RUN dos2unix /src/scripts/docker-write-version.sh && bash /src/scripts/docker-wr
 FROM nginx:alpine
 
 COPY --from=builder /src/webapp /app
+
+VOLUME /app/config.json
 
 # Insert wasm type into Nginx mime.types file so they load correctly.
 RUN sed -i '3i\ \ \ \ application/wasm wasm\;' /etc/nginx/mime.types
