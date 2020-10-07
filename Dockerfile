@@ -25,7 +25,7 @@ RUN yarn build
 
 # Copy the config now so that we don't create another layer in the app image
 #RUN cp /src/config.sample.json /src/webapp/config.json
-RUN cp /src/config.json /src/webapp/config.json
+COPY /src/config.json /src/webapp/config.json
 
 # Ensure we populate the version file
 RUN dos2unix /src/scripts/docker-write-version.sh && bash /src/scripts/docker-write-version.sh
