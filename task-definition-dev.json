@@ -28,26 +28,7 @@
                 }
             ],
             "essential": true,
-            "hostname": "nic-rooms-element-dev",
-            "mountPoints": [
-                {
-                    "sourceVolume": "config",
-                    "containerPath": "/app/config.json"
-                }
-            ]
-        }
-    ],
-    "volumes": [
-        {
-            "name": "config",
-            "dockerVolumeConfiguration" : {
-                "scope": "shared",
-                "autoprovision": true,
-                "driver": "local",
-                "labels": {
-                    "config": "element-config"
-                }
-            }
+            "hostname": "nic-rooms-element-dev"
         }
     ],
     "requiresCompatibilities": ["EC2"],
