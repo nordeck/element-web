@@ -20,10 +20,12 @@ WORKDIR /src
 
 COPY . /src
 
-RUN echo ">>>> /src directory: " $(ls /src)
-
 # Copy the config now so that we don't create another layer in the app image
 #RUN cp /src/config.sample.json /src/webapp/config-dev.json
+RUN mkdir /src/webapp && chmod -R 777 /src/webapp
+
+RUN echo ">>>> /src directory: " $(ls /src)
+
 COPY /src/config-${ENVIRONMENT}.json /src/webapp/config.json
 
 RUN dos2unix /src/scripts/docker-link-repos.sh && bash /src/scripts/docker-link-repos.sh
