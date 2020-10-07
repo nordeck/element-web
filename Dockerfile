@@ -19,12 +19,11 @@ RUN apt-get update && apt-get install -y git dos2unix \
 WORKDIR /src
 
 COPY . /src
+RUN echo ">>>> SRC DIR: " $(ls /src)
 
 # Copy the config now so that we don't create another layer in the app image
 #RUN cp /src/config.sample.json /src/webapp/config.json
 RUN cp /src/config.json /src/webapp/config.json
-
-RUN echo ">>>> SRC DIR: " $(ls /src)
 
 RUN dos2unix /src/scripts/docker-link-repos.sh && bash /src/scripts/docker-link-repos.sh
 RUN yarn --network-timeout=100000 install
