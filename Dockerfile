@@ -25,8 +25,9 @@ COPY . /src
 RUN mkdir /src/webapp && chmod -R 777 /src/webapp
 
 RUN echo ">>>> /src directory: " $(ls /src)
+RUN echo ">>>> /src/webapp directory: " $(ls /src/webapp)
 
-COPY /src/config-${ENVIRONMENT}.json /src/webapp/config.json
+RUN cp config-${ENVIRONMENT}.json /src/webapp/config.json
 
 RUN dos2unix /src/scripts/docker-link-repos.sh && bash /src/scripts/docker-link-repos.sh
 RUN yarn --network-timeout=100000 install
