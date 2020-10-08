@@ -15,10 +15,10 @@
     "disable_3pid_login": false,
     "brand": "Element",
 
-	"integrations_ui_url": "https://dimension-dev.nordeck.systems:8184/element",
-	"integrations_rest_url": "https://dimension-dev.nordeck.systems:8184/api/v1/scalar",
-	"integrations_widgets_urls": ["https://dimension-dev.nordeck.systems:8184/widgets"],
-	"integrations_jitsi_widget_url": "https://dimension-dev.nordeck.systems:8184/widgets/jitsi",
+	"integrations_ui_url": "https://dimension.dev.nordeck.systems:8184/element",
+	"integrations_rest_url": "https://dimension.dev.nordeck.systems:8184/api/v1/scalar",
+	"integrations_widgets_urls": ["https://dimension.dev.nordeck.systems:8184/widgets"],
+	"integrations_jitsi_widget_url": "https://dimension.dev.nordeck.systems:8184/widgets/jitsi",
 
     "bug_report_endpoint_url": "https://element.io/bugreports/submit",
     "defaultCountryCode": "GB",
