@@ -2,12 +2,12 @@
     "default_server_config": {
         "m.homeserver": {
             "base_url": "https://synapse.nordeck.net",
-            "server_name": "synapse.nordeck.net"
+            "server_name": "synapse.nordeck.net",
+            "default_server_name": "synapse.nordeck.net"
         },
         "m.identity_server": {
             "base_url": "https://vector.im"
-        },
-        "default_server_name": "https://synapse.nordeck.net"
+        }
     },
     "disable_custom_urls": false,
     "disable_guests": false,

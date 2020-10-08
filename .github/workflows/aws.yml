@@ -26,8 +26,8 @@
 on:
   workflow_dispatch:
     inputs:
-      environment:
-        description: 'Deployment environment (dev, test, demo, prod)'
+      ENVIRONMENT:
+        description: 'Deployment environment (dev, stage, demo, prod)'
         required: true
         default: 'dev'
 

@@ -20,26 +20,28 @@ WORKDIR /src
 
 COPY . /src
 
-RUN mkdir /src/webapp && chmod -R 777 /src/webapp
-
-# Copy the config now so that we don't create another layer in the app image
-#RUN cp /src/config.sample.json /src/webapp/config-dev.json
-
-RUN cp config-${ENVIRONMENT}.json /src/webapp/config.json
+#RUN mkdir /src/webapp && chmod -R 777 /src/webapp
 
 RUN dos2unix /src/scripts/docker-link-repos.sh && bash /src/scripts/docker-link-repos.sh
 RUN yarn --network-timeout=100000 install
 RUN yarn build
 
+# Copy the config now so that we don't create another layer in the app image
+#RUN cp /src/config.sample.json /src/webapp/config.json
+RUN cp config-${ENVIRONMENT}.json /src/webapp/config.json
 
 # Ensure we populate the version file
 RUN dos2unix /src/scripts/docker-write-version.sh && bash /src/scripts/docker-write-version.sh
 
+RUN echo ">>>> /src directory: " $(ls -l /src)
+RUN echo ">>>> /src/webapp directory: " $(ls -l /src/webapp)
 
 # App
 FROM nginx:alpine
 
 COPY --from=builder /src/webapp /app
+
+RUN echo ">>>> /app directory: " $(ls -l /app)
 
 # Insert wasm type into Nginx mime.types file so they load correctly.
 RUN sed -i '3i\ \ \ \ application/wasm wasm\;' /etc/nginx/mime.types
