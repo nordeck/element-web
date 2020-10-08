@@ -3,11 +3,11 @@ FROM node:12 as builder
 
 # Support custom branches of the react-sdk and js-sdk. This also helps us build
 # images of riot-web develop.
-ENV environment="dev"
+ARG ENV_VAR="dev"
 ARG USE_CUSTOM_SDKS=true
 ARG REACT_SDK_REPO="https://github.com/nordeck/matrix-react-sdk.git"
 #ARG REACT_SDK_REPO="https://github.com/matrix-org/matrix-react-sdk.git"
-ARG REACT_SDK_BRANCH=${environment}
+ARG REACT_SDK_BRANCH=${ENV_VAR}
 ARG JS_SDK_REPO="https://github.com/matrix-org/matrix-js-sdk.git"
 ARG JS_SDK_BRANCH="master"
 
@@ -26,7 +26,7 @@ RUN yarn build
 
 # Copy the config now so that we don't create another layer in the app image
 #RUN cp /src/config.sample.json /src/webapp/config.json
-RUN cp config-${environment}.json /src/webapp/config.json
+RUN cp config-${ENV_VAR}.json /src/webapp/config.json
 
 # Ensure we populate the version file
 RUN dos2unix /src/scripts/docker-write-version.sh && bash /src/scripts/docker-write-version.sh

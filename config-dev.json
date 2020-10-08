@@ -2,8 +2,8 @@
     "default_server_config": {
         "m.homeserver": {
             "base_url": "https://synapse.nordeck.net",
-            "server_name": "synapse.nordeck.net",
-            "default_server_name": "synapse.nordeck.net"
+            "server_name": "synapse.dev.nordeck.systems",
+            "default_server_name": "synapse.dev.nordeck.systems"
         },
         "m.identity_server": {
             "base_url": "https://vector.im"
@@ -36,12 +36,12 @@
     "welcomeUserId": "@riot-bot:matrix.org",
     "piwik": {
         "url": "https://piwik.riot.im/",
-        "whitelistedHSUrls": ["https://synapse.nordeck.net"],
-        "whitelistedISUrls": ["https://vector.im", "https://synapse.nordeck.net"],
+        "whitelistedHSUrls": ["https://synapse.dev.nordeck.systems"],
+        "whitelistedISUrls": ["https://vector.im", "https://synapse.dev.nordeck.systems"],
         "siteId": 1
     },
     "enable_presence_by_hs_url": {
-        "https://synapse.nordeck.net": false,
+        "https://synapse.dev.nordeck.systems": false,
         "https://matrix-client.matrix.org": false
     },
     "settingDefaults": {
