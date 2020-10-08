@@ -3,13 +3,13 @@ FROM node:12 as builder
 
 # Support custom branches of the react-sdk and js-sdk. This also helps us build
 # images of riot-web develop.
+ENV environment="dev"
 ARG USE_CUSTOM_SDKS=true
 ARG REACT_SDK_REPO="https://github.com/nordeck/matrix-react-sdk.git"
 #ARG REACT_SDK_REPO="https://github.com/matrix-org/matrix-react-sdk.git"
-ARG REACT_SDK_BRANCH="develop"
+ARG REACT_SDK_BRANCH=${environment}
 ARG JS_SDK_REPO="https://github.com/matrix-org/matrix-js-sdk.git"
 ARG JS_SDK_BRANCH="master"
-ENV ENVIRONMENT="dev"
 
 RUN apt-get update && apt-get install -y git dos2unix \
 # These packages are required for building Canvas on architectures like Arm
@@ -20,28 +20,21 @@ WORKDIR /src
 
 COPY . /src
 
-#RUN mkdir /src/webapp && chmod -R 777 /src/webapp
-
 RUN dos2unix /src/scripts/docker-link-repos.sh && bash /src/scripts/docker-link-repos.sh
 RUN yarn --network-timeout=100000 install
 RUN yarn build
 
 # Copy the config now so that we don't create another layer in the app image
 #RUN cp /src/config.sample.json /src/webapp/config.json
-RUN cp config-${ENVIRONMENT}.json /src/webapp/config.json
+RUN cp config-${environment}.json /src/webapp/config.json
 
 # Ensure we populate the version file
 RUN dos2unix /src/scripts/docker-write-version.sh && bash /src/scripts/docker-write-version.sh
-
-RUN echo ">>>> /src directory: " $(ls -l /src)
-RUN echo ">>>> /src/webapp directory: " $(ls -l /src/webapp)
 
 # App
 FROM nginx:alpine
 
 COPY --from=builder /src/webapp /app
-
-RUN echo ">>>> /app directory: " $(ls -l /app)
 
 # Insert wasm type into Nginx mime.types file so they load correctly.
 RUN sed -i '3i\ \ \ \ application/wasm wasm\;' /etc/nginx/mime.types

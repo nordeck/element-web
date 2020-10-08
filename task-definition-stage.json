@@ -1,15 +1,15 @@
 {
-    "family": "nic-rooms-element-test",
+    "family": "nic-rooms-element-stage",
     "networkMode": "bridge",
     "containerDefinitions": [
         {
             "name": "nic-rooms-element",
-            "image": "751489943657.dkr.ecr.eu-central-1.amazonaws.com/nic-rooms-element:test-latest",
+            "image": "751489943657.dkr.ecr.eu-central-1.amazonaws.com/nic-rooms-element:stage-latest",
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "secretOptions": null,
                 "options": {
-                    "awslogs-group": "/ecs/nic-rooms-element-test",
+                    "awslogs-group": "/ecs/nic-rooms-element-stage",
                     "awslogs-region": "eu-central-1",
                     "awslogs-stream-prefix": "ecs"
                 }
@@ -24,11 +24,11 @@
             "environment": [
                 {
                     "name": "env",
-                    "value": "test"
+                    "value": "stage"
                 }
             ],
             "essential": true,
-            "hostname": "nic-rooms-element-test"
+            "hostname": "nic-rooms-element-stage"
         }
     ],
     "requiresCompatibilities": ["EC2"],
