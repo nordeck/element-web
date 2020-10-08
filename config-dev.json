@@ -6,7 +6,8 @@
         },
         "m.identity_server": {
             "base_url": "https://vector.im"
-        }
+        },
+        "default_server_name": "https://synapse.nordeck.net"
     },
     "disable_custom_urls": false,
     "disable_guests": false,
@@ -21,7 +22,7 @@
 
     "bug_report_endpoint_url": "https://element.io/bugreports/submit",
     "defaultCountryCode": "GB",
-    "showLabsSettings": false,
+    "showLabsSettings": true,
     "features": {
         "feature_new_spinner": false
     },

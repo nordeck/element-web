@@ -20,12 +20,10 @@ WORKDIR /src
 
 COPY . /src
 
-# Copy the config now so that we don't create another layer in the app image
-#RUN cp /src/config.sample.json /src/webapp/config-dev.json
 RUN mkdir /src/webapp && chmod -R 777 /src/webapp
 
-RUN echo ">>>> /src directory: " $(ls /src)
-RUN echo ">>>> /src/webapp directory: " $(ls /src/webapp)
+# Copy the config now so that we don't create another layer in the app image
+#RUN cp /src/config.sample.json /src/webapp/config-dev.json
 
 RUN cp config-${ENVIRONMENT}.json /src/webapp/config.json
 
