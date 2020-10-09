@@ -1,7 +1,7 @@
 {
     "default_server_config": {
         "m.homeserver": {
-            "base_url": "https://synapse.nordeck.net",
+            "base_url": "https://synapse.dev.nordeck.systems:8448",
             "server_name": "synapse.dev.nordeck.systems",
             "default_server_name": "synapse.dev.nordeck.systems"
         },
