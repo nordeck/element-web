@@ -229,12 +229,12 @@ const setupCompleted = (async (): Promise<string | void> => {
         enableJoinButton(); // always enable the button
     } catch (e) {
         logger.error("Error setting up Jitsi widget", e);
-        document.getElementById("widgetActionContainer").innerText = "Failed to load Jitsi widget";
+        document.getElementById("widgetActionContainer")!.innerText = "Failed to load Jitsi widget";
     }
 })();
 
 function enableJoinButton(): void {
-    document.getElementById("joinButton").onclick = (): void => joinConference();
+    document.getElementById("joinButton")!.onclick = (): void => joinConference();
 }
 
 function switchVisibleContainers(): void {
@@ -248,9 +248,9 @@ function switchVisibleContainers(): void {
 }
 
 function toggleConferenceVisibility(inConference: boolean): void {
-    document.getElementById("jitsiContainer").style.visibility = inConference ? "unset" : "hidden";
+    document.getElementById("jitsiContainer")!.style.visibility = inConference ? "unset" : "hidden";
     // Video rooms have a separate UI for joining, so they should never show our join button
-    document.getElementById("joinButtonContainer").style.visibility =
+    document.getElementById("joinButtonContainer")!.style.visibility =
         inConference || isVideoChannel ? "hidden" : "unset";
 }
 
@@ -308,7 +308,7 @@ async function notifyHangup(errorMessage?: string): Promise<void> {
 
 function closeConference(): void {
     switchVisibleContainers();
-    document.getElementById("jitsiContainer").innerHTML = "";
+    document.getElementById("jitsiContainer")!.innerHTML = "";
 
     if (skipOurWelcomeScreen) {
         skipToJitsiSplashScreen();
@@ -352,7 +352,7 @@ function joinConference(audioInput?: string | null, videoInput?: string | null):
             // eslint-disable-line camelcase
             // We've failing to get a token, don't try to init conference
             logger.warn("Expected to have an OpenID credential, cannot initialize widget.");
-            document.getElementById("widgetActionContainer").innerText = "Failed to load Jitsi widget";
+            document.getElementById("widgetActionContainer")!.innerText = "Failed to load Jitsi widget";
             return;
         }
         jwt = createJWTToken();
