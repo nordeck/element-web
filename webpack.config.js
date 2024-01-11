@@ -113,7 +113,8 @@ module.exports = (env, argv) => {
     const nodeEnv = argv.mode;
     const devMode = nodeEnv !== "production";
     const useHMR = process.env.CSS_HOT_RELOAD === "1" && devMode;
-    const enableMinification = !devMode && !process.env.CI_PACKAGE;
+    //const enableMinification = !devMode && !process.env.CI_PACKAGE;
+    const enableMinification = false;
 
     const development = {};
     if (devMode) {
